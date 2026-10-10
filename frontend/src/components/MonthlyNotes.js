@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { monthlyNotesAPI, incomeAPI, transactionAPI } from '../services/api';
+import { monthlyNotesAPI } from '../services/api';
 import '../styles/MonthlyNotes.css';
 
-function MonthlyNotes() {
+function MonthlyNotes({ transactions = [] }) {
   const [currentMonth, setCurrentMonth] = useState(() => {
     const now = new Date();
     return { year: now.getFullYear(), month: now.getMonth() + 1 };
@@ -16,35 +16,36 @@ function MonthlyNotes() {
   useEffect(() => {
     fetchMonthlyData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentMonth]);
+  }, [currentMonth, transactions]);
 
   const fetchMonthlyData = async () => {
     setLoading(true);
     try {
-      // Fetch monthly note
+      const monthTransactions = transactions.filter((transaction) => {
+        const transactionDate = new Date(transaction.date);
+        return (
+          transactionDate.getFullYear() === currentMonth.year &&
+          transactionDate.getMonth() === currentMonth.month - 1
+        );
+      });
+
+      const incomeTotal = monthTransactions
+        .filter((transaction) => transaction.type === 'income')
+        .reduce((sum, transaction) => sum + Number(transaction.amount || 0), 0);
+
+      const expenseTotal = monthTransactions
+        .filter((transaction) => transaction.type === 'expense')
+        .reduce((sum, transaction) => sum + Number(transaction.amount || 0), 0);
+
+      setTotalIncome(incomeTotal);
+      setTotalExpense(expenseTotal);
+
       const noteResponse = await monthlyNotesAPI.get(currentMonth.year, currentMonth.month);
       if (noteResponse.data) {
         setNotes(noteResponse.data.notes || '');
       } else {
         setNotes('');
       }
-
-      // Fetch total income
-      const incomeResponse = await incomeAPI.getMonthlyTotal(
-        currentMonth.year,
-        currentMonth.month
-      );
-      setTotalIncome(incomeResponse.data.total || 0);
-
-      // Fetch total expense
-      const expenseResponse = await transactionAPI.getMonthlySummary(
-        currentMonth.year,
-        currentMonth.month
-      );
-      const total = expenseResponse.data.reduce((sum, item) => {
-        return item.type === 'Expense' ? sum + item.total : sum;
-      }, 0);
-      setTotalExpense(total);
     } catch (err) {
       console.error('Error fetching monthly data:', err);
     } finally {

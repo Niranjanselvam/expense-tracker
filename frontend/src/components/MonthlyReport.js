@@ -1,25 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { transactionAPI } from '../services/api';
+import React, { useState } from 'react';
 import '../styles/MonthlyReport.css';
 
 function MonthlyReport({ transactions }) {
   const [selectedMonth, setSelectedMonth] = useState(new Date());
-  const [summary, setSummary] = useState(null);
-
-  useEffect(() => {
-    loadMonthlySummary();
-  }, [selectedMonth, transactions]);
-
-  const loadMonthlySummary = async () => {
-    try {
-      const year = selectedMonth.getFullYear();
-      const month = selectedMonth.getMonth() + 1;
-      const response = await transactionAPI.getMonthlySummary(year, month);
-      setSummary(response.data);
-    } catch (err) {
-      console.error('Error loading monthly summary:', err);
-    }
-  };
 
   const handlePrevMonth = () => {
     setSelectedMonth(new Date(selectedMonth.getFullYear(), selectedMonth.getMonth() - 1));
