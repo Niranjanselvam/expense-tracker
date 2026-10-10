@@ -1,0 +1,14 @@
+{
+  "name": "expense-tracker-mern",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "server": "npm --prefix server run dev",
+    "client": "npm --prefix client start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

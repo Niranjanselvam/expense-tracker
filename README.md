@@ -34,7 +34,7 @@ A full-stack web application for tracking income and expenses with data visualiz
 
 ```
 .
-├── backend/
+├── server/
 │   ├── src/
 │   │   ├── server.js          # Express app setup
 │   │   ├── models/
@@ -47,7 +47,7 @@ A full-stack web application for tracking income and expenses with data visualiz
 │   ├── .env.example
 │   └── finance.db             # SQLite database (created on first run)
 │
-├── frontend/
+├── client/
 │   ├── src/
 │   │   ├── App.js             # Main app component
 │   │   ├── index.js           # React entry point
@@ -71,6 +71,7 @@ A full-stack web application for tracking income and expenses with data visualiz
 │   │       └── index.html
 │   └── package.json
 │
+├── package.json
 ├── .gitignore
 ├── README.md
 └── .github/
@@ -83,48 +84,33 @@ A full-stack web application for tracking income and expenses with data visualiz
 - Node.js (v14 or higher)
 - npm or yarn
 
-### Backend Setup
+### Root Setup
 
-1. Navigate to backend folder:
-```bash
-cd backend
-```
-
-2. Install dependencies:
+1. Install all dependencies from the project root:
 ```bash
 npm install
 ```
 
-3. Create `.env` file (copy from `.env.example`):
+2. Start both the API and the React app together:
 ```bash
-cp .env.example .env
+npm run dev
 ```
 
-4. Start the backend server:
-```bash
-npm start
-```
+The backend runs on `http://localhost:5000` and the frontend opens at `http://localhost:3000`.
 
-The API server will run on `http://localhost:5000`
+### Backend Setup
+
+```bash
+npm --prefix server install
+npm --prefix server run dev
+```
 
 ### Frontend Setup
 
-1. Navigate to frontend folder:
 ```bash
-cd frontend
+npm --prefix client install
+npm --prefix client start
 ```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm start
-```
-
-The frontend will open at `http://localhost:3000`
 
 ## API Endpoints
 
@@ -246,16 +232,21 @@ CREATE TABLE transactions (
 
 ### Running in Development Mode
 
+From the project root:
+```bash
+npm run dev
+```
+
+Or run each part separately:
+
 Backend:
 ```bash
-cd backend
-npm run dev  # Uses nodemon for auto-reload
+npm --prefix server run dev
 ```
 
 Frontend:
 ```bash
-cd frontend
-npm start    # React scripts with hot reload
+npm --prefix client start
 ```
 
 ## Learning Points
