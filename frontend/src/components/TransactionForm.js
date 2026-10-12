@@ -2,6 +2,38 @@ import React, { useState, useEffect } from 'react';
 import { transactionAPI } from '../services/api';
 import '../styles/TransactionForm.css';
 
+const CATEGORY_OPTIONS = {
+  income: [
+    'Salary',
+    'Freelancing',
+    'Business',
+    'Investments',
+    'Rental Income',
+    'Interest',
+    'Bonus',
+    'Other Income',
+  ],
+  expense: [
+    'Food',
+    'Transport',
+    'Shopping',
+    'Rent',
+    'Electricity',
+    'Water Bill',
+    'Internet',
+    'Mobile Recharge',
+    'Healthcare',
+    'Education',
+    'Entertainment',
+    'Groceries',
+    'Travel',
+    'Personal Care',
+    'EMI / Loan',
+    'Insurance',
+    'Other Expense',
+  ],
+};
+
 function TransactionForm({ onSuccess, editingTransaction }) {
   const [formData, setFormData] = useState({
     type: 'expense',
@@ -22,16 +54,26 @@ function TransactionForm({ onSuccess, editingTransaction }) {
 
   useEffect(() => {
     if (editingTransaction) {
-      setFormData(editingTransaction);
+      setFormData({
+        ...editingTransaction,
+        category: editingTransaction.category || '',
+      });
     }
   }, [editingTransaction]);
 
   const fetchCategories = async (type) => {
     try {
       const response = await transactionAPI.getCategories(type);
-      setCategories(response.data || []);
+      const savedCategories = response.data || [];
+      const mergedCategories = [...new Set([
+        ...(CATEGORY_OPTIONS[type] || []),
+        ...savedCategories,
+        ...(formData.category ? [formData.category] : []),
+      ])];
+      setCategories(mergedCategories);
     } catch (err) {
       console.error('Error fetching categories:', err);
+      setCategories(CATEGORY_OPTIONS[type] || []);
     }
   };
 
@@ -40,6 +82,7 @@ function TransactionForm({ onSuccess, editingTransaction }) {
     setFormData(prev => ({
       ...prev,
       [name]: value,
+      ...(name === 'type' ? { category: '' } : {}),
     }));
   };
 
@@ -70,12 +113,7 @@ function TransactionForm({ onSuccess, editingTransaction }) {
     }
   };
 
-  const commonCategories = {
-    income: ['Salary', 'Freelance', 'Investment', 'Bonus', 'Other'],
-    expense: ['Food', 'Transport', 'Utilities', 'Entertainment', 'Shopping', 'Health', 'Other'],
-  };
-
-  const catList = categories.length > 0 ? categories : commonCategories[formData.type];
+  const catList = categories.length > 0 ? categories : CATEGORY_OPTIONS[formData.type] || [];
 
   return (
     <form className="transaction-form" onSubmit={handleSubmit}>
@@ -91,7 +129,13 @@ function TransactionForm({ onSuccess, editingTransaction }) {
 
       <div className="form-group">
         <label>Category:</label>
-        <select name="category" value={formData.category} onChange={handleChange} required>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+          aria-label="Transaction category"
+        >
           <option value="">Select a category</option>
           {catList.map(cat => (
             <option key={cat} value={cat}>{cat}</option>

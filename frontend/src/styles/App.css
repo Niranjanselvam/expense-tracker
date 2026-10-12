@@ -1,4 +1,6 @@
 .app-shell {
+  width: 100%;
+  max-width: none;
   min-height: 100vh;
   background:
     radial-gradient(circle at top left, rgba(96, 165, 250, 0.25), transparent 28%),
@@ -7,12 +9,16 @@
 }
 
 .app-header {
+  width: 100%;
+  max-width: none;
   padding: 2rem 2rem 0;
+  box-sizing: border-box;
 }
 
 .header-content {
-  max-width: 1400px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding: 1.5rem 1.75rem;
   border-radius: 24px;
   background: rgba(15, 23, 42, 0.88);
@@ -22,6 +28,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  box-sizing: border-box;
 }
 
 .eyebrow {
@@ -70,27 +77,37 @@
 
 .app-container {
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  gap: 2rem;
-  max-width: 1400px;
+  grid-template-columns: minmax(440px, 520px) minmax(0, 1fr);
+  gap: 1.5rem;
   width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: none;
+  margin: 0;
+  padding: 1.5rem 1.25rem 2rem;
+  box-sizing: border-box;
+  align-items: start;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  position: sticky;
-  top: 1.5rem;
-  height: fit-content;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  justify-content: flex-start;
 }
 
 .main-content {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 
 .dashboard-overview {
@@ -197,10 +214,12 @@
 @media (max-width: 980px) {
   .app-container {
     grid-template-columns: 1fr;
+    padding: 1rem;
   }
 
   .sidebar {
     position: static;
+    width: 100%;
   }
 
   .dashboard-overview {
@@ -217,6 +236,7 @@
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    padding: 1.2rem 1rem;
   }
 
   .app-container {

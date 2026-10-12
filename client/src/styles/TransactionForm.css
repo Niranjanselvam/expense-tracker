@@ -1,65 +1,94 @@
 .transaction-form {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(239, 246, 255, 0.92));
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 26px;
+  padding: 1.6rem 1.4rem 1.4rem;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.09);
+  overflow: hidden;
+}
+
+.transaction-form::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.22), transparent 66%);
+  pointer-events: none;
 }
 
 .transaction-form h2 {
-  margin-bottom: 1.5rem;
-  color: #333;
-  font-size: 1.3rem;
+  position: relative;
+  margin: 0 0 1.35rem;
+  color: #0f172a;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
 }
 
-.form-group {
-  margin-bottom: 1.2rem;
+.transaction-form .form-group {
+  position: relative;
+  margin-bottom: 1.05rem;
 }
 
-.form-group label {
+.transaction-form .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
-  color: #555;
-  font-weight: 500;
-  font-size: 0.95rem;
+  margin: 0 0 0.55rem;
+  color: #334155;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
 }
 
-.form-group input,
-.form-group select {
+.transaction-form .form-group input,
+.transaction-form .form-group select {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid rgba(148, 163, 184, 0.38);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #0f172a;
+  font-size: 0.98rem;
   font-family: inherit;
-  transition: border-color 0.3s ease;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.transaction-form .form-group input::placeholder {
+  color: #94a3b8;
+}
+
+.transaction-form .form-group input:focus,
+.transaction-form .form-group select:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: rgba(99, 102, 241, 0.8);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
 }
 
 .transaction-form button {
   width: 100%;
-  padding: 0.75rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  margin-top: 0.6rem;
+  padding: 0.95rem 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #f8fafc;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 14px 28px rgba(79, 70, 229, 0.25);
 }
 
 .transaction-form button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 18px 30px rgba(79, 70, 229, 0.27);
 }
 
 .transaction-form button:disabled {
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: not-allowed;
 }

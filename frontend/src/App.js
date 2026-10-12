@@ -4,7 +4,6 @@ import TransactionList from './components/TransactionList';
 import Charts from './components/Charts';
 import MonthlyReport from './components/MonthlyReport';
 import Filters from './components/Filters';
-import IncomeManager from './components/IncomeManager';
 import MonthlyNotes from './components/MonthlyNotes';
 import { transactionAPI } from './services/api';
 import './styles/App.css';
@@ -113,7 +112,16 @@ function App() {
             onSuccess={handleAddSuccess}
             editingTransaction={editingTransaction}
           />
-          <IncomeManager />
+
+          {loading ? (
+            <p className="loading sidebar-loading">Loading transactions...</p>
+          ) : (
+            <TransactionList 
+              transactions={transactions}
+              onEdit={handleEditTransaction}
+              onDelete={handleDeleteTransaction}
+            />
+          )}
         </aside>
 
         <section className="main-content">
@@ -171,11 +179,6 @@ function App() {
               <Charts transactions={transactions} />
               <MonthlyReport transactions={transactions} />
               <MonthlyNotes transactions={transactions} />
-              <TransactionList 
-                transactions={transactions}
-                onEdit={handleEditTransaction}
-                onDelete={handleDeleteTransaction}
-              />
             </>
           )}
         </section>

@@ -120,82 +120,89 @@ function IncomeManager() {
 
   return (
     <div className="income-manager">
-      <h2>💵 Income Manager</h2>
+      <div className="income-header">
+        <div>
+          <p className="eyebrow">Monthly overview</p>
+          <h2>💵 Income Manager</h2>
+        </div>
+        <div className="header-pill">{incomeList.length} entries</div>
+      </div>
 
-      {/* Summary Stats */}
       <div className="income-summary">
         <div className="summary-card">
-          <span className="label">Total Income:</span>
+          <span className="label">Total Income</span>
           <span className="value">₹ {getTotalIncome()}</span>
         </div>
         <div className="summary-card">
-          <span className="label">Transactions:</span>
+          <span className="label">This Month</span>
           <span className="value">{incomeList.length}</span>
         </div>
       </div>
 
-      {/* Form */}
       <div className="income-form">
-        <h3>{editingId ? 'Edit Income' : 'Add Income'}</h3>
-
-        <div className="form-group">
-          <label>Date:</label>
-          <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleInputChange}
-          />
+        <div className="section-heading">
+          <h3>{editingId ? 'Edit Income' : 'Add Income'}</h3>
         </div>
 
-        <div className="form-group">
-          <label>Amount:</label>
-          <input
-            type="number"
-            name="amount"
-            step="0.01"
-            min="0"
-            value={formData.amount}
-            onChange={handleInputChange}
-            placeholder="Enter amount"
-          />
-        </div>
+        <div className="income-form-grid">
+          <div className="income-field">
+            <label>Date</label>
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleInputChange}
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Source:</label>
-          <select name="source" value={formData.source} onChange={handleInputChange}>
-            {sources.map((src) => (
-              <option key={src} value={src}>
-                {src}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div className="income-field">
+            <label>Amount</label>
+            <input
+              type="number"
+              name="amount"
+              step="0.01"
+              min="0"
+              value={formData.amount}
+              onChange={handleInputChange}
+              placeholder="0.00"
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Description:</label>
-          <input
-            type="text"
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-            placeholder="Optional description"
-          />
+          <div className="income-field">
+            <label>Source</label>
+            <select name="source" value={formData.source} onChange={handleInputChange}>
+              {sources.map((src) => (
+                <option key={src} value={src}>
+                  {src}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="income-field income-field--full">
+            <label>Description</label>
+            <input
+              type="text"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              placeholder="Optional description"
+            />
+          </div>
         </div>
 
         <div className="form-actions">
-          <button className="submit-btn" onClick={handleAddIncome}>
+          <button type="button" className="submit-btn" onClick={handleAddIncome}>
             {editingId ? 'Update Income' : 'Add Income'}
           </button>
           {editingId && (
-            <button className="cancel-btn" onClick={handleCancel}>
+            <button type="button" className="cancel-btn" onClick={handleCancel}>
               Cancel
             </button>
           )}
         </div>
       </div>
 
-      {/* Income by Source */}
       <div className="income-breakdown">
         <h3>Income by Source</h3>
         <div className="breakdown-cards">
@@ -207,50 +214,6 @@ function IncomeManager() {
           ))}
         </div>
       </div>
-
-      {/* Income List */}
-      {incomeList.length > 0 && (
-        <div className="income-list">
-          <h3>All Income Entries</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Source</th>
-                <th>Amount</th>
-                <th>Description</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {incomeList.map((income) => (
-                <tr key={income.id}>
-                  <td>{income.date}</td>
-                  <td>{income.source}</td>
-                  <td className="amount">₹ {income.amount.toFixed(2)}</td>
-                  <td>{income.description || '-'}</td>
-                  <td className="actions">
-                    <button
-                      className="edit-btn"
-                      onClick={() => handleEditIncome(income)}
-                      title="Edit"
-                    >
-                      ✏️
-                    </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleDeleteIncome(income.id)}
-                      title="Delete"
-                    >
-                      🗑️
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
 
       {loading && <p className="loading">Loading income data...</p>}
     </div>

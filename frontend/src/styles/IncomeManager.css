@@ -1,106 +1,139 @@
 .income-manager {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(12, 74, 110, 0.96) 0%, rgba(15, 23, 42, 0.97) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 26px;
   padding: 24px;
   margin-bottom: 24px;
-  color: white;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  color: #ecfeff;
+  box-shadow: 0 22px 44px rgba(14, 116, 144, 0.18);
+}
+
+.income-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.income-header .eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a7f3d0;
 }
 
 .income-manager h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 1.8em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 0;
+  font-size: clamp(1.8rem, 2.3vw, 2.3rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.header-pill {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.83rem;
+  color: #d1fae5;
+  white-space: nowrap;
 }
 
 .income-manager h3 {
-  margin-bottom: 16px;
+  margin: 0 0 18px;
   font-size: 1.2em;
+  color: #ecfeff;
 }
 
-/* Summary Section */
 .income-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
 .summary-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.18), rgba(15, 23, 42, 0.35));
+  border: 1px solid rgba(167, 243, 208, 0.18);
+  border-radius: 18px;
+  padding: 18px 18px 16px;
+  text-align: left;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 16px 32px rgba(2, 6, 23, 0.14);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.summary-card:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .summary-card .label {
   display: block;
-  font-size: 0.9em;
-  color: #d1fae5;
-  margin-bottom: 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a7f3d0;
+  margin-bottom: 10px;
 }
 
 .summary-card .value {
   display: block;
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #6ee7b7;
+  font-size: clamp(1.5rem, 2vw, 2.1rem);
+  font-weight: 800;
+  color: #ecfeff;
 }
 
-/* Form Section */
 .income-form {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.34), rgba(15, 23, 42, 0.18));
+  border-radius: 18px;
   padding: 20px;
-  margin-bottom: 24px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-.income-form .form-group {
-  margin-bottom: 16px;
+.income-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
 
-.income-form label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 8px;
+.income-manager .income-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.income-manager .income-field--full {
+  grid-column: 1 / -1;
+}
+
+.income-manager .income-form label {
+  font-size: 0.85rem;
+  font-weight: 700;
   color: #d1fae5;
 }
 
-.income-form input,
-.income-form select {
+.income-manager .income-form input,
+.income-manager .income-form select {
   width: 100%;
-  padding: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  font-size: 1em;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f0fdfa;
   box-sizing: border-box;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
-.income-form input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+.income-manager .income-form input::placeholder {
+  color: rgba(240, 253, 250, 0.56);
 }
 
-.income-form input:focus,
-.income-form select:focus {
+.income-manager .income-form input:focus,
+.income-manager .income-form select:focus {
   outline: none;
-  border-color: #6ee7b7;
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 10px rgba(110, 231, 183, 0.3);
+  border-color: rgba(110, 231, 183, 0.95);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 4px rgba(110, 231, 183, 0.18);
 }
 
 .form-actions {
@@ -113,115 +146,118 @@
 .submit-btn,
 .cancel-btn {
   flex: 1;
-  min-width: 120px;
-  padding: 12px 24px;
-  font-size: 1em;
+  min-width: 140px;
+  padding: 12px 18px;
+  font-size: 0.96rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  font-weight: 700;
+  transition: all 0.2s ease;
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
-  color: #065f46;
-  box-shadow: 0 4px 12px rgba(110, 231, 183, 0.3);
+  background: linear-gradient(135deg, #a7f3d0 0%, #34d399 100%);
+  color: #064e3b;
+  box-shadow: 0 12px 28px rgba(52, 211, 153, 0.22);
 }
 
 .submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(110, 231, 183, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(52, 211, 153, 0.3);
+}
+
+.submit-btn:active,
+.cancel-btn:active {
+  transform: translateY(0);
 }
 
 .cancel-btn {
   background: transparent;
   color: #d1fae5;
-  border: 2px solid #d1fae5;
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .cancel-btn:hover {
-  background: rgba(209, 250, 229, 0.1);
-  border-color: #6ee7b7;
+  background: rgba(255, 255, 255, 0.04);
 }
 
-/* Income Breakdown */
 .income-breakdown {
   margin-bottom: 24px;
 }
 
 .breakdown-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 12px;
 }
 
 .breakdown-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(15, 23, 42, 0.12));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 14px 16px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.breakdown-card:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
 }
 
 .breakdown-card .source {
   display: block;
-  font-size: 0.9em;
+  font-size: 0.8rem;
   color: #d1fae5;
   margin-bottom: 8px;
 }
 
 .breakdown-card .amount {
   display: block;
-  font-size: 1.4em;
-  font-weight: bold;
-  color: #6ee7b7;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ecfeff;
 }
 
-/* Income List */
 .income-list {
   margin-top: 24px;
+}
+
+.income-list h3 {
+  margin-bottom: 14px;
 }
 
 .income-list table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.18);
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 14px 30px rgba(2, 6, 23, 0.12);
 }
 
 .income-list thead {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .income-list th {
-  padding: 12px;
+  padding: 12px 14px;
   text-align: left;
   font-weight: 600;
   color: #d1fae5;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .income-list td {
-  padding: 12px;
-  color: #a7f3d0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 14px;
+  color: #d1fae5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  vertical-align: middle;
 }
 
 .income-list tbody tr:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .income-list .amount {
-  font-weight: 600;
-  color: #6ee7b7;
+  font-weight: 700;
+  color: #a7f3d0;
 }
 
 .income-list .actions {
@@ -231,33 +267,47 @@
 
 .edit-btn,
 .delete-btn {
-  background: transparent;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
-  font-size: 1.2em;
-  padding: 4px 8px;
-  border-radius: 4px;
+  font-size: 1rem;
+  padding: 7px 9px;
+  border-radius: 9px;
   transition: all 0.2s ease;
 }
 
 .edit-btn:hover {
-  background: rgba(110, 231, 183, 0.2);
-  transform: scale(1.2);
+  background: rgba(110, 231, 183, 0.15);
+  transform: translateY(-1px);
 }
 
 .delete-btn:hover {
-  background: rgba(239, 68, 68, 0.2);
-  transform: scale(1.2);
+  background: rgba(248, 113, 113, 0.12);
+  transform: translateY(-1px);
 }
 
 .loading {
   text-align: center;
-  padding: 20px;
+  padding: 18px;
   color: #d1fae5;
   font-style: italic;
 }
 
-/* Responsive */
+@media (max-width: 600px) {
+  .income-manager {
+    padding: 18px;
+  }
+
+  .income-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .income-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .income-manager {
     padding: 16px;

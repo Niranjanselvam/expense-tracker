@@ -98,14 +98,51 @@ export async function deleteTransaction(id) {
   db.close();
 }
 
+const DEFAULT_CATEGORIES = {
+  income: [
+    'Salary',
+    'Freelancing',
+    'Business',
+    'Investments',
+    'Rental Income',
+    'Interest',
+    'Bonus',
+    'Other Income',
+  ],
+  expense: [
+    'Food',
+    'Transport',
+    'Shopping',
+    'Rent',
+    'Electricity',
+    'Water Bill',
+    'Internet',
+    'Mobile Recharge',
+    'Healthcare',
+    'Education',
+    'Entertainment',
+    'Groceries',
+    'Travel',
+    'Personal Care',
+    'EMI / Loan',
+    'Insurance',
+    'Other Expense',
+  ],
+};
+
 // Get categories by type
 export async function getCategories(type) {
+  const normalizedType = typeof type === 'string' ? type.toLowerCase() : '';
   const db = getDatabase();
   const categories = await allQuery(
     db,
     'SELECT DISTINCT category FROM transactions WHERE type = ? ORDER BY category',
-    [type]
+    [normalizedType]
   );
   db.close();
-  return categories.map(c => c.category);
+
+  const existingCategories = categories.map(c => c.category).filter(Boolean);
+  const defaultCategories = DEFAULT_CATEGORIES[normalizedType] || [];
+
+  return [...new Set([...defaultCategories, ...existingCategories])];
 }
